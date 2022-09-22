@@ -1,0 +1,86 @@
+---
+title: "HW1"
+output: github_document
+author: "Amy Yeung (ay2543)"
+date: "2022-09-22"
+---
+
+```{r, message=F}
+library(tidyverse)
+```
+
+
+# Problem 1
+
+## Load `penguins` dataset
+
+```{r,  message=F}
+data("penguins", package = "palmerpenguins")
+```
+
+## Describe the `penguins` dataset
+
+
+### Variables and data
+```{r}
+colnames(penguins)
+skimr::skim(penguins)
+```
+There are 8 variables in the `penguins` dataset:
+
+* species (factor variable)
+* island (factor variable)
+* bill_length_mm (character variable)
+* bill_depth_mm (character variable)
+* flipper_length_mm (character variable)
+* body_mass_g (character variable)
+* sex (factor variable)
+* year (character variable)
+
+### Size of dataset
+```{r}
+nrow(penguins)
+ncol(penguins)
+```
+There are 344 observations and 8 variables.
+
+### Mean flipper length
+```{r}
+mean(penguins$flipper_length_mm, na.rm=T)
+```
+The mean flipper length is 200.9152 mm.
+
+### Scatterplot of flipper_length_mm vs bill_length_mm
+
+```{r}
+  ggplot(penguins, 
+  aes(x = bill_length_mm, 
+      y = flipper_length_mm,
+      color = species)) +
+geom_point()
+
+
+```
+
+### Save scatterplot
+```{r}
+ggsave("problem1_scatter.pdf", device = "pdf")
+```
+
+
+# Problem 2
+
+```{r}
+df = tibble(
+  norm_dist = rnorm(n = 10),
+  positive_dist = norm_dist > 0,
+  
+)
+```
+
+
+
+
+
+
+

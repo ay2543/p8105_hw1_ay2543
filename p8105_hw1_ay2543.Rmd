@@ -46,7 +46,9 @@ There are 344 observations and 8 variables.
 
 ### Mean flipper length
 ```{r}
-mean(penguins$flipper_length_mm, na.rm=T)
+penguins %>% 
+  pull(flipper_length_mm) %>% 
+  mean(na.rm = TRUE)
 ```
 The mean flipper length is 200.9152 mm.
 
@@ -70,17 +72,78 @@ ggsave("problem1_scatter.pdf", device = "pdf")
 
 # Problem 2
 
+## Create dataframe
 ```{r}
 df = tibble(
   norm_dist = rnorm(n = 10),
   positive_dist = norm_dist > 0,
-  
+  chr = letters[1:10],
+  fac = factor(c("low", "middle", "high", "low", "middle", "high", "low", "middle", "high", "high"))
 )
+
+# Preview df
+head(df)
 ```
 
+## Taking means
 
+```{r}
+# 1. norm_dist
+df %>% 
+  pull(norm_dist) %>% 
+  mean()
+```
+The mean of `norm_dist` is 0.08684786
 
+```{r}
+# 2. positive_dist
+df %>% 
+  pull(positive_dist) %>% 
+  mean()
+```
 
+The mean of `positive_dist` is 0.5
 
+```{r}
+# 3. chr
+df %>% 
+  pull(chr) %>% 
+  mean()
+```
+A mean cannot be obtained for `chr`.
+
+```{r}
+# 4. fac
+df %>% 
+  pull(fac) %>% 
+  mean()
+```
+
+A mean cannot be obtained for `fac`.
+
+## Factor conversion
+
+```{r, eval=FALSE}
+df %>% 
+  pull(norm_dist) %>% 
+  as.numeric()
+
+df %>% 
+  pull(positive_dist) %>% 
+  as.numeric()
+
+df %>% 
+  pull(chr) %>% 
+  as.numeric()
+
+df %>% 
+  pull(fac) %>% 
+  as.numeric()
+```
+
+* It worked for `norm_dist` as it was originally a numeric vector.
+* It worked for `positive_dist` and converted the True/False values into 1/0 binary values
+* It didn't work for `chr` and everything became NA
+* It worked for `fac` and converted each level into 1/2/3
 
 

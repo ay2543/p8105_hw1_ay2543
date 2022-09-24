@@ -24,18 +24,18 @@ data("penguins", package = "palmerpenguins")
 ### Variables and data
 ```{r}
 colnames(penguins)
-skimr::skim(penguins)
+head(penguins)
 ```
 There are 8 variables in the `penguins` dataset:
 
 * species (factor variable)
 * island (factor variable)
-* bill_length_mm (character variable)
-* bill_depth_mm (character variable)
-* flipper_length_mm (character variable)
-* body_mass_g (character variable)
+* bill_length_mm (double variable)
+* bill_depth_mm (double variable)
+* flipper_length_mm (integer variable)
+* body_mass_g (integer variable)
 * sex (factor variable)
-* year (character variable)
+* year (integer variable)
 
 ### Size of dataset
 ```{r}
@@ -93,7 +93,7 @@ df %>%
   pull(norm_dist) %>% 
   mean()
 ```
-The mean of `norm_dist` is 0.08684786
+The mean of `norm_dist` is `r mean(df$norm_dist)`.
 
 ```{r}
 # 2. positive_dist
@@ -102,7 +102,7 @@ df %>%
   mean()
 ```
 
-The mean of `positive_dist` is 0.5
+The mean of `positive_dist` is `r mean(df$positive_dist)`.
 
 ```{r}
 # 3. chr
@@ -110,7 +110,7 @@ df %>%
   pull(chr) %>% 
   mean()
 ```
-A mean cannot be obtained for `chr`.
+A mean cannot be obtained for `chr` as it is a chararcter variable.
 
 ```{r}
 # 4. fac
